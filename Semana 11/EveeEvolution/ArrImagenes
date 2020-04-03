@@ -1,0 +1,189 @@
+#pragma once
+#include <vector>
+#include "Eevee.h"
+#include "Flareon.h"
+#include "Vaporeon.h"
+#include "Jolteon.h"
+
+#include "PiedraFuego.h"
+#include "PiedraAgua.h"
+#include "PiedraElectrica.h"
+
+
+using namespace std;
+
+class CArrImagenes
+{
+private:
+	vector<CEevee*> eevees;
+	vector<CFlareon*> flareons;
+	vector<CJolteon*> jolteons;
+	vector<CVaporeon*> vaporeons;
+
+	vector<CPiedraFuego*> piedrasfuego;
+	vector<CPiedraAgua*> piedrasagua;
+	vector<CPiedraElectrica*> piedraselectricas;
+
+public:
+	CArrImagenes() {}
+	~CArrImagenes() {}
+
+	void AgregarEevee()
+	{
+		CEevee *aux = new CEevee();
+		eevees.push_back(aux);
+	}
+
+	void AgregarPiedraFuego()
+	{
+		CPiedraFuego *aux = new CPiedraFuego();
+		piedrasfuego.push_back(aux);
+	}
+
+	void AgregarPiedraElectrica()
+	{
+		CPiedraElectrica *aux = new CPiedraElectrica();
+		piedraselectricas.push_back(aux);
+	}
+
+	void AgregarPiedraAgua()
+	{
+		CPiedraAgua *aux = new CPiedraAgua();
+		piedrasagua.push_back(aux);
+	}
+
+	
+	void dibujarTodo(Graphics ^g, Bitmap ^bmpEevee, Bitmap ^bmpFlareon, Bitmap ^bmpVaporeon
+		, Bitmap ^bmpJolteon, Bitmap ^bmpFuego, Bitmap ^bmpElectrico, Bitmap ^bmpAgua)
+	{
+		for (int i = 0; i < eevees.size(); i++)
+		{
+			eevees[i]->dibujar(g,bmpEevee);
+		}
+
+		for (int i = 0; i < piedrasfuego.size(); i++)
+		{
+			piedrasfuego[i]->dibujar(g,bmpFuego);
+		}
+		for (int i = 0; i < piedrasagua.size(); i++)
+		{
+			piedrasagua[i]->dibujar(g,bmpAgua);
+		}
+		for (int i = 0; i < piedraselectricas.size(); i++)
+		{
+			piedraselectricas[i]->dibujar(g,bmpElectrico);
+		}
+
+		for (int i = 0; i < flareons.size(); i++)
+		{
+			flareons[i]->dibujar(g,bmpFlareon);
+		}
+		for (int i = 0; i < vaporeons.size(); i++)
+		{
+			vaporeons[i]->dibujar(g,bmpVaporeon);
+		}
+		for (int i = 0; i < jolteons.size(); i++)
+		{
+			jolteons[i]->dibujar(g,bmpJolteon);
+		}
+	}
+
+	void moverTodo(int maxAncho, int maxAlto)
+	{
+		for (int i = 0; i < eevees.size(); i++)
+		{
+			eevees[i]->mover(maxAncho,maxAlto);
+		}
+
+		for (int i = 0; i < piedrasfuego.size(); i++)
+		{
+			piedrasfuego[i]->mover(maxAncho, maxAlto);
+		}
+		for (int i = 0; i < piedrasagua.size(); i++)
+		{
+			piedrasagua[i]->mover(maxAncho, maxAlto);
+		}
+		for (int i = 0; i < piedraselectricas.size(); i++)
+		{
+			piedraselectricas[i]->mover(maxAncho, maxAlto);
+		}
+
+		for (int i = 0; i < flareons.size(); i++)
+		{
+			flareons[i]->mover(maxAncho, maxAlto);
+		}
+		for (int i = 0; i < vaporeons.size(); i++)
+		{
+			vaporeons[i]->mover(maxAncho, maxAlto);
+		}
+		for (int i = 0; i < jolteons.size(); i++)
+		{
+			jolteons[i]->mover(maxAncho, maxAlto);
+		}
+	}
+
+	void Colision()
+	{
+		for (int i = 0; i < eevees.size(); i++)
+		{
+			for (int j = 0; j < piedrasfuego.size(); j++)
+			{
+				if (eevees[i]->getCarta().IntersectsWith(piedrasfuego[j]->getCarta()) && eevees[i]->getVisible())
+				{
+					CFlareon *aux = new CFlareon(eevees[i]->getX(), eevees[i]->getY());
+					flareons.push_back(aux);
+					eevees[i]->setVisible(false);
+					piedrasfuego[j]->setVisible(false);
+				}		
+			}
+		}
+
+		for (int i = 0; i < eevees.size(); i++)
+		{
+			for (int j = 0; j < piedrasagua.size(); j++)
+			{
+				if (eevees[i]->getCarta().IntersectsWith(piedrasagua[j]->getCarta()) && eevees[i]->getVisible())
+				{
+					CVaporeon *aux = new CVaporeon(eevees[i]->getX(), eevees[i]->getY());
+					vaporeons.push_back(aux);
+					eevees[i]->setVisible(false);
+					piedrasagua[j]->setVisible(false);
+				}
+			}
+		}
+
+		for (int i = 0; i < eevees.size(); i++)
+		{
+			for (int j = 0; j < piedraselectricas.size(); j++)
+			{
+				if (eevees[i]->getCarta().IntersectsWith(piedraselectricas[j]->getCarta()) && eevees[i]->getVisible())
+				{
+					CJolteon *aux = new CJolteon(eevees[i]->getX(), eevees[i]->getY());
+					jolteons.push_back(aux);
+					eevees[i]->setVisible(false);
+					piedraselectricas[j]->setVisible(false);
+				}
+			}
+		}
+
+		//Eliminacion
+		for (int i = 0; i < eevees.size(); i++)
+		{
+			if (!eevees[i]->getVisible()) eevees.erase(eevees.begin() + i);
+		}
+		for (int i = 0; i < piedrasfuego.size(); i++)
+		{
+			if (!piedrasfuego[i]->getVisible()) piedrasfuego.erase(piedrasfuego.begin() + i);
+		}
+		for (int i = 0; i < piedrasagua.size(); i++)
+		{
+			if (!piedrasagua[i]->getVisible()) piedrasagua.erase(piedrasagua.begin() + i);
+		}
+		for (int i = 0; i < piedraselectricas.size(); i++)
+		{
+			if (!piedraselectricas[i]->getVisible()) piedraselectricas.erase(piedraselectricas.begin() + i);
+		}
+
+	}
+
+};

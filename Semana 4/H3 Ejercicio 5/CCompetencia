@@ -1,0 +1,84 @@
+#pragma once
+#include <iostream>
+
+#include "CCarro.h"
+
+using namespace System;
+using namespace std;
+
+class CCompetencia
+{
+private:
+	CCarro **Arreglo;
+	int x1, y1, color1, velocidad1;
+	int x2, y2, color2, velocidad2;
+	int x3, y3, color3, velocidad3;
+
+
+public:
+	CCompetencia()
+	{
+		Arreglo = new CCarro*[3];
+		x1 = 5; y1 = 5; color1 = 0, velocidad1 = 1 + rand() % 3;
+		x2 = 5; y2 = 10; color2 = 1, velocidad2 = 1 + rand() % 3;
+		x3 = 5; y3 = 15; color3 = 2, velocidad3 = 1 + rand() % 3;
+	}
+
+	~CCompetencia(){}
+
+	void GenerarCarros()
+	{
+		Arreglo[0] = new CCarro(x1, y1, color1, velocidad1);
+		Arreglo[1] = new CCarro(x2, y2, color2, velocidad2);
+		Arreglo[2] = new CCarro(x3, y3, color3, velocidad3);
+	}
+
+	void Pista()
+	{
+		for (int i = 0; i < 20; i++)
+		{
+			for (int j = 0; j <= 55; j++)
+			{
+				if (j == 55)cout << "*";
+				else cout << " ";
+			}
+			cout << endl;
+		}
+	}
+
+	void Carrera()
+	{
+		char tecla;
+		Arreglo[0]->Dibujar();
+		Arreglo[1]->Dibujar();
+		Arreglo[2]->Dibujar();
+
+		while (1)
+		{
+			if (_kbhit())
+			{
+				tecla = _getch();
+				tecla = toupper(tecla);
+
+				if (tecla == 'G')
+				{
+					while (1)
+					{
+						for (int i = 0; i < 3; i++)
+						{
+							Arreglo[i]->Borrar();
+							Arreglo[i]->Mover();
+							Arreglo[i]->Dibujar();
+						}
+
+						if (Arreglo[0]->getX() == 55) { cout << "Gano el auto nro 1"; break; }
+						if (Arreglo[1]->getX() == 55) { cout << "Gano el auto nro 2"; break; }
+						if (Arreglo[2]->getX() == 55) { cout << "Gano el auto nro 3"; break; }
+
+						_sleep(100);
+					}
+				}
+			}
+		}
+	}
+};

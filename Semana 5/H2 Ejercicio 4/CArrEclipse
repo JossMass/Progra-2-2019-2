@@ -1,0 +1,83 @@
+#pragma once
+
+#include <iostream>
+#include <string>
+#include <vector>
+
+#include "CEclipse.h"
+
+using namespace std;
+
+class CArrEclipse
+{
+private:
+	vector<CEclipse*> Arreglo;
+
+public:
+	CArrEclipse() {}
+	~CArrEclipse() {}
+
+	void AgregarEclipse()
+	{
+		CEclipse *aux = new CEclipse();
+		Arreglo.push_back(aux);
+	}
+
+	void InsertarEclipse(int posicion)
+	{
+		CEclipse *aux = new CEclipse();
+		Arreglo.insert(Arreglo.begin() + posicion, aux);
+	}
+
+	void EliminarEclipse(int posicion)
+	{
+		Arreglo.erase(Arreglo.begin() + posicion);
+	}
+
+	void ModificarTipoEclipse(int posicion, string valor)
+	{
+		Arreglo.at(posicion)->setTipo(valor);
+	}
+
+	void MostrarEclipses()
+	{
+		for (int i = 0; i < Arreglo.size(); i++)
+		{
+			Arreglo[i]->MostrarInfo();
+		}
+	}
+
+	void EclipsesVistosEnEuropa()
+	{
+		for (int i = 0; i < Arreglo.size(); i++)
+		{
+			if (Arreglo[i]->getVisibilidad() == "Europa")
+			{
+				Arreglo[i]->MostrarInfo();
+			}
+		}
+	}
+
+	void EclipsesQueOcasionaronSismos()
+	{
+		for (int i = 0; i < Arreglo.size(); i++)
+		{
+			if (Arreglo[i]->getSismo() == "Si")
+			{
+				Arreglo[i]->MostrarInfo();
+			}
+		}
+	}
+
+	void EclipsesEnLaNoche()
+	{
+		for (int i = 0; i < Arreglo.size(); i++)
+		{
+			if (Arreglo[i]->getHora().getHora() >= 18)
+			{
+				Arreglo[i]->MostrarInfo();
+			}
+		}
+	}
+
+};

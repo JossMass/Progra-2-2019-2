@@ -1,0 +1,32 @@
+#pragma once
+
+#include <iostream>
+#include <conio.h>
+#include <string>
+
+using namespace std;
+
+class Triangulo : public Figura
+{
+private:
+	int base;
+	int altura;
+public:
+	Triangulo(int base, int altura) : Figura()
+	{
+		this->base = base;
+		this->altura = altura;
+	}
+
+	~Triangulo() {}
+
+	void Area()
+	{
+		cout << "El area es: " << base * altura / 2 << endl;
+	}
+
+	void Perimetro()
+	{
+		cout << "El permitro es: " << 3*base << endl;
+	}
+};

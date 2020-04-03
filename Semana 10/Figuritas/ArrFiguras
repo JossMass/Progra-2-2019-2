@@ -1,0 +1,40 @@
+#pragma once
+#include "Elipse.h"
+#include "Rectangulo.h"
+#include <vector>
+
+using namespace std;
+using namespace System::Drawing;
+
+class CArrFiguras
+{
+private:
+	vector<CElipse*> elipses;
+	vector<CRectangulo*> rectangulos;
+
+public:
+	CArrFiguras(){}
+	~CArrFiguras(){}
+
+	void DibujarTodo(Graphics ^g, Pen ^pincel, Brush ^pincel2)
+	{
+		for (int i = 0;i < elipses.size();i++)
+		{
+			elipses.at(i)->dibujar(g, pincel2);
+		}
+		for (int i = 0;i < rectangulos.size(); i++)
+		{
+			rectangulos[i]->dibujar(g,pincel);
+		}
+	}
+
+	void AgregarElipse(CElipse *aux)
+	{
+		elipses.push_back(aux);
+	}
+
+	void AgregarRectangulo(CRectangulo *aux)
+	{
+		rectangulos.push_back(aux);
+	}
+};

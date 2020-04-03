@@ -1,0 +1,71 @@
+#pragma once
+#include"Activo.h"
+#include "iostream"
+
+using namespace System;
+using namespace std;
+
+class ArregloActivos {
+private:
+	Activo **arreglo;
+	int *n;
+public:
+	ArregloActivos() {
+		n = new int;
+		*n = 0;
+		arreglo = NULL;
+	}
+	void agregarActivo(Activo* dato)
+	{
+		Activo **aux = new Activo*[*n + 1];
+
+			for (int i = 0; i < *n; i++) 
+			{
+				aux[i] = arreglo[i];
+			}
+			aux[*n] = dato;
+			*n = *n + 1;
+			
+			arreglo = aux;
+	}
+
+	void EliminarActivo(int pos)
+	{
+		Activo** aux2 = new Activo*[*n - 1];
+		if (aux2 != NULL) {
+			for (int i = 0; i < pos; i++) {
+				aux2[i] = arreglo[i];
+			}
+			for (int i = pos; i < *n; i++) {
+				aux2[i - 1] = arreglo[i];
+			}
+			*n = *n - 1;
+			if (arreglo != NULL) {
+				delete arreglo;
+			}
+			arreglo = aux2;
+		}
+	}
+	Activo* getActivo(int indice)
+	{
+		return arreglo[indice];
+	}
+
+	void getArreglo()
+	{
+		for (int i = 0; i < *n; i++)
+		{
+			cout << "Activo " << i << " :" << endl;
+			cout << "Codigo: " << arreglo[i]->getCodigo() << endl;
+			cout << "Descripcion: " << arreglo[i]->getDesc() << endl;
+			cout << "Precio de compra: " << arreglo[i]->getPrecio() << endl;
+			cout << "Porcentaje de depreciacion: " << arreglo[i]->getPor() << endl;
+		}
+	}
+
+	int getN()
+	{
+		return *n;
+	}
+	~ArregloActivos() {}
+};

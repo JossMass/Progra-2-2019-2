@@ -1,0 +1,83 @@
+#include <iostream>
+#include <conio.h>
+using namespace std;
+using namespace System;
+#define MAX_NUMEROS 20
+
+void generar_numeros(int *Vnumeros, int *nele)
+{
+	Random r;
+	int i;
+	for (i = 0 ;i< *nele;i++)
+		Vnumeros[i] = r.Next(1, 91);
+
+}
+
+void mostrar_numeros(int *Vnumeros, int *nele)
+{
+    int i;
+	for (i = 0;i < *nele;i++)
+		cout << Vnumeros[i] << " ";
+	cout << endl;
+}
+
+void insertar_numero(int *Vnumeros, int *nele, int valor, int posicion)
+{
+	int i;
+	for (i = *nele - 1;i >= posicion;i--)
+		Vnumeros[i + 1] = Vnumeros[i];
+	Vnumeros[posicion] = valor;
+	(*nele)++;
+}
+
+int buscar_elemento(int *Vnumeros, int *nele,int valorbuscado)
+{
+	int i, posicion;
+	posicion = -1;// establecer una posicion que no existe , asi tomar en cuenta a las demas
+
+	for (i = 0;i < *nele && posicion == -1;i++)
+		if (Vnumeros[i] == valorbuscado)
+			posicion = i;
+	return posicion;
+
+}
+
+void eliminar_elemento(int *Vnumeros, int *nele, int valoraborrar)
+{
+	int i, posicion;
+	posicion = buscar_elemento(Vnumeros, nele, valoraborrar);
+	if (posicion != -1)
+	{
+		for (i = posicion;i < *nele - 1;i++)
+			Vnumeros[i] = Vnumeros[i + 1];
+		(*nele)--;
+	}
+}
+
+void main()
+{
+	int *Vnumeros, *nele, valor, posicion;
+	nele = new int;
+	do
+	{
+		cout << "Ingrese cantidad de numeros: "; cin >> *nele;
+	} while (*nele <1 || *nele >MAX_NUMEROS);
+	Vnumeros = new int[*nele];
+	generar_numeros(Vnumeros, nele);
+	mostrar_numeros(Vnumeros, nele);
+	cout << "Ingrese valor a insertar:"; cin >> valor;
+	cout << "Ingrese posicion donde insertar:"; cin >> posicion;
+	if (posicion >= 0 && posicion < *nele && *nele != MAX_NUMEROS)
+
+	{
+		insertar_numero(Vnumeros, nele, valor, posicion);
+		mostrar_numeros(Vnumeros, nele);
+	}
+	else
+		cout << "posicion errada o vector lleno\n";
+	cout << "ingrese elemento a eliminar:"; cin >> valor;
+	eliminar_elemento(Vnumeros, nele, valor);
+	mostrar_numeros(Vnumeros, nele);
+	_getch();
+
+}

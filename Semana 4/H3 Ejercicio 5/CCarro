@@ -1,0 +1,71 @@
+#pragma once
+#include <iostream>
+
+#include "CChasis.h"
+#include "CLlanta.h"
+
+using namespace std;
+using namespace System;
+
+class CCarro
+{
+private:
+	int x, y, color, velocidad;
+
+	CLlanta *llanta1;
+	CLlanta *llanta2;
+	CLlanta *llanta3;
+	CLlanta *llanta4;
+	CChasis *chasis;
+
+public:
+	CCarro(int x, int y, int color, int velocidad)
+	{
+		this->x = x;
+		this->y = y;
+		this->color = color;
+		this->velocidad = velocidad;
+		llanta1 = new CLlanta(x+1, y+1, color, velocidad);
+		llanta2 = new CLlanta(x-1, y+1, color, velocidad);
+		llanta3 = new CLlanta(x+1, y-1, color, velocidad);
+		llanta4 = new CLlanta(x-1, y-1, color, velocidad);
+		chasis = new CChasis(x, y, color, velocidad);
+
+	}
+
+	~CCarro(){}
+
+	int getX()
+	{
+		return chasis->getX();
+	}
+	
+	void Borrar()
+	{
+		llanta1->Borrar();
+		llanta2->Borrar();
+		llanta3->Borrar();
+		llanta4->Borrar();
+		chasis->Borrar();
+
+	}
+
+	void Mover()
+	{
+		llanta1->Mover();
+		llanta2->Mover();
+		llanta3->Mover();
+		llanta4->Mover();
+		chasis->Mover();
+	}
+
+	void Dibujar()
+	{
+		llanta1->Dibujar();
+		llanta2->Dibujar();
+		llanta3->Dibujar();
+		llanta4->Dibujar();
+		chasis->Dibujar();
+	}
+
+};

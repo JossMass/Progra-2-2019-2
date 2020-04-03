@@ -1,0 +1,54 @@
+#pragma once
+#include <iostream>
+#include <string>
+#include <vector>
+
+#include "Avion.h"
+using namespace std;
+
+class CLan : public CAvion
+{
+public:
+	CLan(int x, int y, int modelo) : CAvion(x, y, modelo, "Lan")
+	{
+		switch (modelo)
+		{
+		case 1:
+			sprite = {
+				"-----------",
+				"_\__(_)__/_",
+				"  . / \."
+			};
+			ancho = 12;
+			break;
+
+		case 2:
+			sprite = {
+				"________|________",
+				" _|_____0_____|_",
+				"      |   |"
+			};
+			ancho = 17;
+			break;
+
+		case 3:
+			sprite = {
+				"       __|__",
+				"________(*)________",
+				"       o/ \o",
+			};
+			ancho = 19;
+			break;
+		
+		}
+
+		borrar =
+		{
+			"                     ",
+			"                     ",
+			"                     "
+		};
+	}
+
+	~CLan(){}
+};

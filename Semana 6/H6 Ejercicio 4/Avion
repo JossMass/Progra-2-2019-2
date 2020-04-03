@@ -1,0 +1,94 @@
+#pragma once
+
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+using namespace System;
+
+class CAvion
+{
+protected:
+	int x;
+	int y;
+	int velocidad;
+	int modelo;
+	int ancho;
+	string nombre;
+	vector<string> sprite;
+	vector<string> borrar;
+
+public:
+	CAvion(int &x, int &y, int &modelo, string nombre)
+	{
+		this->x = x;
+		this->y = y;
+		this->modelo = modelo;
+		this->nombre = nombre;
+		ancho = 0;
+		velocidad = rand() % 101;
+		sprite = vector<string>();
+		borrar = vector<string>();
+	}
+
+	void dibujar()
+	{
+		//dibujar
+		Console::SetCursorPosition(x, y);
+		for (int i = 0; i < sprite.size(); i++)
+		{
+			cout << sprite[i];
+			Console::SetCursorPosition(x, y + i + 1);
+		}
+
+		//limpiar
+		/*Console::SetCursorPosition(x - 1, y);
+		for (int i = 0; i < borrar.size(); i++)
+		{
+			cout << borrar[i];
+			Console::SetCursorPosition(x - 1, y + i + 1);
+		}*/
+		system("cls");
+			
+
+	}
+
+	void avanzar()
+	{
+		if (velocidad == 100000)
+		{
+			if (x < 50 && y == 5)
+			{
+				x++;
+				velocidad = 0;
+				dibujar();
+			}
+
+			if (x == 49 && y < 25)
+			{
+				y++;
+				velocidad = 0;
+				dibujar();
+			}
+
+			if (y == 24 && x < 50)
+			{
+				x--;
+				velocidad = 0;
+				dibujar();
+			}
+			
+			if (x == 10 && y < 25)
+			{
+				y--;
+				velocidad = 0;
+				dibujar();
+			}
+		}
+		else
+			velocidad++;
+	}
+
+
+};

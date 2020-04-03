@@ -1,0 +1,18 @@
+#pragma once
+
+#include <iostream>
+#include <conio.h>
+#include <string>
+
+using namespace std;
+
+class Figura
+{
+public:
+
+	Figura(){}
+	~Figura(){}
+
+	virtual void Area(){}
+	virtual void Perimetro(){}
+};

@@ -1,0 +1,56 @@
+#pragma once
+#include <iostream>
+#include <stdlib.h>
+#include <fstream>
+#include <string>
+
+using namespace System;
+using namespace std;
+
+class CArchivos
+{
+private:
+	ofstream archivoEscribir;
+	ifstream archivoLeer;
+	string texto;
+	int x, y, vidas, tiempo;
+
+public:
+	CArchivos(){}
+	~CArchivos() {}
+
+	void leerDatos()
+	{
+		archivoLeer.open("configuracion.txt", ios::in);
+
+		if (archivoLeer.fail())
+		{
+			archivoLeer.close();
+			archivoEscribir.open("configuracion.txt", ios::out);
+			archivoEscribir << "25" << endl;
+			archivoEscribir << "25" << endl;
+			archivoEscribir << "3" << endl;
+			archivoEscribir << "10" << endl;
+
+			archivoEscribir.close();
+			archivoLeer.open("configuracion.txt", ios::in);
+		}
+
+		getline(archivoLeer, texto);
+		x = atoi(texto.c_str());
+		getline(archivoLeer, texto);
+		y = atoi(texto.c_str());
+		getline(archivoLeer, texto);
+		vidas = atoi(texto.c_str());
+		getline(archivoLeer, texto);
+		tiempo = atoi(texto.c_str());
+
+		archivoLeer.close();
+	}
+
+	int getX() { return x; }
+	int getY() { return y; }
+	int getTiempo() { return tiempo; }
+	int getVidas() { return vidas; }
+
+};

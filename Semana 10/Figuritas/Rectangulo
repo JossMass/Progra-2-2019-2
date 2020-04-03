@@ -1,0 +1,33 @@
+#pragma once
+
+using namespace std;
+
+class CRectangulo
+{
+private:
+	int ancho;
+	int alto;
+	int x;
+	int y;
+
+public:
+	CRectangulo(int ancho, int alto, int x, int y)
+	{
+		this->alto = alto;
+		this->ancho = ancho;
+		this->x = x;
+		this->y = y;
+	}
+
+	~CRectangulo(){}
+
+	double getArea()
+	{
+		return alto*ancho;
+	}
+
+	void dibujar(Graphics ^g, Pen ^pincel)
+	{
+		g->DrawRectangle(pincel, x, y, ancho, alto);
+	}
+};

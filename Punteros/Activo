@@ -1,0 +1,54 @@
+#pragma once
+#include "iostream"
+#include "string"
+
+class Activo {
+private:
+	char* codigo;
+	char* desc;
+	double precio;
+	double por;
+public:
+	Activo()
+	{
+		codigo = new char[20];
+		desc = new char[40];
+	}
+	void setCodigo(char* _codigo)
+	{
+		strcpy(codigo, _codigo);
+	}
+	char* getCodigo()
+	{
+		return codigo;
+	}
+	void setDesc(char* _desc)
+	{
+		strcpy(desc, _desc);
+	}
+	char* getDesc()
+	{
+		return desc;
+	}
+	void setPrecio(double _precio)
+	{
+		precio = _precio;
+	}
+	double getPrecio()
+	{
+		return precio;
+	}
+	void setPor(double _por)
+	{
+		por = _por;
+	}
+	double getPor()
+	{
+		return por;
+	}
+	~Activo() {
+		delete[] codigo;
+		delete[] desc;
+	}
+};
+

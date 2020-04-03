@@ -1,0 +1,19 @@
+#include <ctime>
+#include <iostream>
+#include <conio.h>
+
+using namespace std;
+using namespace System;
+
+#include "Tour.h"
+
+int main()
+{
+	Console::SetWindowSize(100, 57);
+	srand(time(NULL));
+	Console::CursorVisible = false;
+	CTour tour = CTour();
+	tour.ComenzarTour();
+	_getch();
+	return 0;
+}

@@ -1,0 +1,46 @@
+#pragma once
+#include <iostream>
+
+using namespace std;
+using namespace System;
+
+class CLlanta
+{
+private:
+	int x, y;
+	int color;
+	int velocidad;
+public:
+	CLlanta(int _x, int _y, int _color, int _velocidad)
+	{
+		x = _x;
+		y = _y;
+		color = _color;
+		velocidad = _velocidad;
+	}
+	~CLlanta(){}
+
+	void Borrar()
+	{
+		Console::BackgroundColor = ConsoleColor::Black;
+		Console::SetCursorPosition(x, y); cout << " ";
+	}
+
+	void Mover()
+	{
+		
+		x = x + velocidad;
+	}
+
+	void Dibujar()
+	{
+		switch (color)
+		{
+		case 0: Console::ForegroundColor = ConsoleColor::Blue; break;
+		case 1: Console::ForegroundColor = ConsoleColor::Green; break;
+		case 2: Console::ForegroundColor = ConsoleColor::Red; break;
+		case 3: Console::ForegroundColor = ConsoleColor::Yellow; break;
+		}
+		Console::SetCursorPosition(x, y); cout << char(219);
+	}
+};

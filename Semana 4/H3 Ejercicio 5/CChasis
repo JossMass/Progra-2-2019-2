@@ -1,0 +1,61 @@
+#pragma once
+#pragma once
+#include <iostream>
+
+using namespace std;
+using namespace System;
+
+class CChasis
+{
+private:
+	int x, y;
+	int color;
+	int velocidad;
+public:
+	CChasis(int _x, int _y, int _color, int _velocidad)
+	{
+		x = _x;
+		y = _y;
+		color = _color;
+		velocidad = _velocidad;
+	}
+	~CChasis() {}
+
+	void Borrar()
+	{
+		Console::BackgroundColor = ConsoleColor::Black;
+		Console::SetCursorPosition(x, y); cout << " ";
+		Console::SetCursorPosition(x - 1, y); cout << " ";
+		Console::SetCursorPosition(x + 1, y); cout << " ";
+		Console::SetCursorPosition(x + 2, y); cout << " ";
+
+
+	}
+
+	void Mover()
+	{
+		 x = x + velocidad;
+	}
+
+	int getX()
+	{
+		return x + 2;
+	}
+
+	void Dibujar()
+	{
+		switch (color)
+		{
+		case 0: Console::ForegroundColor = ConsoleColor::Blue; break;
+		case 1: Console::ForegroundColor = ConsoleColor::Green; break;
+		case 2: Console::ForegroundColor = ConsoleColor::Red; break;
+		case 3: Console::ForegroundColor = ConsoleColor::Yellow; break;
+		}
+		Console::SetCursorPosition(x, y); cout << char(220);
+		Console::SetCursorPosition(x - 1, y); cout << char(220);
+		Console::SetCursorPosition(x + 1, y); cout << char(220);
+		Console::SetCursorPosition(x + 2, y); cout << char(220);
+
+
+	}
+};

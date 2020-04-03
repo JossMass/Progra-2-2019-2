@@ -1,0 +1,33 @@
+#pragma once
+
+#include "CartaImagen.h"
+
+class CEevee : public CCartaImagen
+{
+private:
+public:
+	CEevee()
+	{
+		ancho = 734;
+		alto = 1024;
+	}
+
+	void dibujar(Graphics ^g, Bitmap ^bmp)
+	{
+		g->DrawImage(bmp, x, y, ancho*0.1, alto*0.1);
+	}
+
+	void mover(int maxAncho, int maxAlto)
+	{
+		if (x <= 0 || x + ancho*0.1 >= maxAncho)dx *= -1;
+		if (y <= 0 || y + alto*0.1 >= maxAlto)dy *= -1;
+
+		x += dx;
+		y += dy;
+	}
+
+	Rectangle getCarta()
+	{
+		return Rectangle(x, y, ancho*0.1, alto*0.1);
+	}
+};

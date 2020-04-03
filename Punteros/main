@@ -1,0 +1,100 @@
+// ConsoleApplication78.cpp : main project file.
+
+
+#include "iostream"
+#include "conio.h"
+#include "Arreglo.h"
+
+using namespace System;
+using namespace std;
+
+void Menu()
+{
+	cout << "### MENU DE OPCIONES ###" << endl;
+	cout << "1. Mostrar Activos " << endl;
+	cout << "2. Eliminar un Activo " << endl;
+	cout << "3. Registrar Activos " << endl;
+
+}
+
+int main()
+{
+	int respuesta;
+	char* codigo1 = new char[20];
+	char* desc1 = new char[40];
+	double precio1;
+	double por1;
+	int pos;
+
+	ArregloActivos *arreglo = new ArregloActivos();
+	while (1)
+	{
+		Menu();
+		cin >> respuesta;
+		if (respuesta == 1)
+		{
+			if (arreglo->getN() > 0)
+			{
+				cout << "### Activos ###" << endl;
+				/*for (int i = 0; i < arreglo->getN(); i++)
+				{
+					dato = arreglo->getActivo(i);
+					cout << "Activo " << i + 1 << " :" << endl;
+					cout << "Codigo: " << dato->getCodigo() << endl;
+					cout << "Descripcion: " << dato->getDesc() << endl;
+					cout << "Precio de compra: " << dato->getPrecio() << endl;
+					cout << "Porcentaje de depreciacion: " << dato->getPor() << endl;
+				}*/
+
+				arreglo->getArreglo();
+
+				getch();
+				system("cls");
+			}
+			else
+			{
+				cout << "No hay Datos..." << endl;
+				getch();
+				system("cls");
+			}
+		}
+		if (respuesta == 2)
+		{
+			cout << "Ingrese la posicion del Activo que desea eliminar: ";
+			cin >> pos;
+			arreglo->EliminarActivo(pos);
+			getch();
+			system("cls");
+		}
+		if (respuesta == 3)
+		{
+			
+			cout << "### Ingrese los datos del Activo ###" << endl;
+			cout << "Ingrese su codigo: ";
+			cin.ignore();
+			cin.getline(codigo1, 20);
+			cout << "Ingrese su descripcion: ";
+			cin.ignore();
+			cin.getline(desc1, 40);
+			cout << "Ingrese su precio de compra: ";
+			cin >> precio1;
+			cout << "Ingrese el porcentaje de depreciacion: ";
+			cin >> por1;
+			cout << "%" << endl;
+
+			Activo *dato = new Activo();
+			dato->setCodigo(codigo1);
+			dato->setDesc(desc1);
+			dato->setPrecio(precio1);
+			dato->setPor(por1);
+
+			arreglo->agregarActivo(dato);
+			getch();
+			system("cls");
+		}
+
+	}
+
+	getch();
+	return 0;
+}

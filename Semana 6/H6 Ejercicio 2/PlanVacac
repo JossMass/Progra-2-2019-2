@@ -1,0 +1,32 @@
+#pragma once
+#include <iostream>
+#include <string>
+
+#include "Hotel.h"
+#include "Boleto.h"
+
+using namespace std;
+
+class CPlanVacac : public CHotel, public CBoleto
+{
+private:
+	int duracion;
+	int presupuesto;
+
+public:
+	CPlanVacac()
+	{
+		duracion = rand() % 11;
+		presupuesto = rand() % 20000;
+	}
+
+	~CPlanVacac(){}
+
+	void getInfoPlanVacac()
+	{
+		cout << "Duracion: " << duracion << endl;
+		cout << "Presupuesto: " << presupuesto << endl;
+		getInfoBoleto();
+		getInfoHotel();
+	}
+};

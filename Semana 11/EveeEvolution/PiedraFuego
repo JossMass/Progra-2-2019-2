@@ -1,0 +1,33 @@
+#pragma once
+
+#include "CartaImagen.h"
+
+class CPiedraFuego : public CCartaImagen
+{
+private:
+public:
+	CPiedraFuego()
+	{
+		ancho = 94;
+		alto = 98;
+	}
+
+	void dibujar(Graphics ^g, Bitmap ^bmp)
+	{
+		g->DrawImage(bmp, x, y, ancho*0.5, alto*0.5);
+	}
+
+	void mover(int maxAncho, int maxAlto)
+	{
+		if (x <= 0 || x + ancho*0.5 >= maxAncho)dx *= -1;
+		if (y <= 0 || y + alto*0.5 >= maxAlto)dy *= -1;
+
+		x += dx;
+		y += dy;
+	}
+
+	Rectangle getCarta()
+	{
+		return Rectangle(x, y, ancho*0.5, alto*0.5);
+	}
+};

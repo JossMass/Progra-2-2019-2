@@ -1,0 +1,206 @@
+#pragma once
+#include <ctime>
+#include "Controlador.h"
+#include "Archivos.h"
+
+namespace Experimento {
+
+	using namespace System;
+	using namespace System::ComponentModel;
+	using namespace System::Collections;
+	using namespace System::Windows::Forms;
+	using namespace System::Data;
+	using namespace System::Drawing;
+
+	/// <summary>
+	/// Resumen de FrmPrincipal
+	/// </summary>
+	public ref class FrmPrincipal : public System::Windows::Forms::Form
+	{
+	public:
+		FrmPrincipal(void)
+		{
+			InitializeComponent();
+			archivo = new CArchivos();
+			archivo->leerDatos();
+			srand(time(NULL));
+			g = pnlLienzo->CreateGraphics();
+			espacio = BufferedGraphicsManager::Current;
+			buffer = espacio->Allocate(g, pnlLienzo->ClientRectangle);
+			bmpEnemigo = gcnew Bitmap("proton.png");
+			bmpMapa = gcnew Bitmap("mapa.png");
+			bmpPersonaje = gcnew Bitmap("rojo.png");
+			controlador = new CControlador(bmpEnemigo, bmpPersonaje, archivo->getX(), archivo->getY(), archivo->getVidas());
+
+		}
+
+	private:
+		BufferedGraphicsContext^ espacio;
+		BufferedGraphics^ buffer;
+		Graphics ^g;
+		Bitmap^ bmpEnemigo;
+		Bitmap^ bmpMapa;
+		Bitmap^ bmpPersonaje;
+		CArchivos *archivo;
+
+	private: System::Windows::Forms::Label^  lblVidas;
+	private: System::Windows::Forms::Label^  label1;
+	private: System::Windows::Forms::Timer^  tmrTiempo;
+	private: System::Windows::Forms::Label^  lblTiempo;
+	private: System::Windows::Forms::Label^  label2;
+			 CControlador *controlador;
+
+	protected:
+		/// <summary>
+		/// Limpiar los recursos que se estén usando.
+		/// </summary>
+		~FrmPrincipal()
+		{
+			if (components)
+			{
+				delete components;
+			}
+		}
+	private: System::Windows::Forms::Panel^  pnlLienzo;
+	protected:
+	private: System::Windows::Forms::Timer^  timer1;
+	private: System::ComponentModel::IContainer^  components;
+
+	private:
+		/// <summary>
+		/// Variable del diseñador necesaria.
+		/// </summary>
+
+
+#pragma region Windows Form Designer generated code
+		/// <summary>
+		/// Método necesario para admitir el Diseñador. No se puede modificar
+		/// el contenido de este método con el editor de código.
+		/// </summary>
+		void InitializeComponent(void)
+		{
+			this->components = (gcnew System::ComponentModel::Container());
+			this->pnlLienzo = (gcnew System::Windows::Forms::Panel());
+			this->lblVidas = (gcnew System::Windows::Forms::Label());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
+			this->tmrTiempo = (gcnew System::Windows::Forms::Timer(this->components));
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->lblTiempo = (gcnew System::Windows::Forms::Label());
+			this->pnlLienzo->SuspendLayout();
+			this->SuspendLayout();
+			// 
+			// pnlLienzo
+			// 
+			this->pnlLienzo->Controls->Add(this->lblTiempo);
+			this->pnlLienzo->Controls->Add(this->label2);
+			this->pnlLienzo->Controls->Add(this->lblVidas);
+			this->pnlLienzo->Controls->Add(this->label1);
+			this->pnlLienzo->Location = System::Drawing::Point(3, 3);
+			this->pnlLienzo->Name = L"pnlLienzo";
+			this->pnlLienzo->Size = System::Drawing::Size(799, 350);
+			this->pnlLienzo->TabIndex = 0;
+			// 
+			// lblVidas
+			// 
+			this->lblVidas->AutoSize = true;
+			this->lblVidas->Location = System::Drawing::Point(50, 10);
+			this->lblVidas->Name = L"lblVidas";
+			this->lblVidas->Size = System::Drawing::Size(0, 13);
+			this->lblVidas->TabIndex = 1;
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(10, 10);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(33, 13);
+			this->label1->TabIndex = 0;
+			this->label1->Text = L"Vidas";
+			// 
+			// timer1
+			// 
+			this->timer1->Enabled = true;
+			this->timer1->Tick += gcnew System::EventHandler(this, &FrmPrincipal::timer1_Tick);
+			// 
+			// tmrTiempo
+			// 
+			this->tmrTiempo->Enabled = true;
+			this->tmrTiempo->Interval = 1000;
+			this->tmrTiempo->Tick += gcnew System::EventHandler(this, &FrmPrincipal::tmrTiempo_Tick);
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(112, 10);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(42, 13);
+			this->label2->TabIndex = 2;
+			this->label2->Text = L"Tiempo";
+			// 
+			// lblTiempo
+			// 
+			this->lblTiempo->AutoSize = true;
+			this->lblTiempo->Location = System::Drawing::Point(161, 10);
+			this->lblTiempo->Name = L"lblTiempo";
+			this->lblTiempo->Size = System::Drawing::Size(0, 13);
+			this->lblTiempo->TabIndex = 3;
+			// 
+			// FrmPrincipal
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(803, 355);
+			this->Controls->Add(this->pnlLienzo);
+			this->Name = L"FrmPrincipal";
+			this->Text = L"FrmPrincipal";
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &FrmPrincipal::FrmPrincipal_KeyDown);
+			this->pnlLienzo->ResumeLayout(false);
+			this->pnlLienzo->PerformLayout();
+			this->ResumeLayout(false);
+
+		}
+#pragma endregion
+	private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
+
+		lblVidas->Text = "" + controlador->getPersonaje()->getVidas();
+		lblTiempo->Text = "" + controlador->getTiempo();
+		controlador->Colision();
+		controlador->moverTodo(buffer->Graphics);
+		controlador->dibujarTodo(buffer->Graphics, bmpEnemigo, bmpMapa, bmpPersonaje);
+
+		if (controlador->getPersonaje()->getVidas() == 0)
+		{
+			timer1->Enabled = false;
+			MessageBox::Show("Perdiste pe");
+			this->Close();
+		}
+		else if (controlador->getTiempo() == archivo->getTiempo())
+		{
+			timer1->Enabled = false;
+			MessageBox::Show("Ganaste pe");
+			this->Close();
+		}
+		else
+		{
+			buffer->Render(g);
+		}
+	}
+	private: System::Void FrmPrincipal_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e) {
+		switch (e->KeyCode)
+		{
+		case Keys::A:
+			controlador->getPersonaje()->mover(buffer->Graphics, 'A'); break;
+		case Keys::S:
+			controlador->getPersonaje()->mover(buffer->Graphics, 'S'); break;
+		case Keys::D:
+			controlador->getPersonaje()->mover(buffer->Graphics, 'D'); break;
+		case Keys::W:
+			controlador->getPersonaje()->mover(buffer->Graphics, 'W'); break;
+		}
+	}
+private: System::Void tmrTiempo_Tick(System::Object^  sender, System::EventArgs^  e) {
+	controlador->aumentarTiempo();
+}
+};
+}

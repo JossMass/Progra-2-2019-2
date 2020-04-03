@@ -1,0 +1,43 @@
+#include "Competencia.h"
+#include <iostream>
+#include <ctime>
+#include <conio.h>
+
+using namespace std;
+using namespace System;
+
+int main()
+{
+	Console::SetWindowSize(100, 40);
+	srand(time(NULL));
+	CCompetencia compe = CCompetencia();
+	char tecla;
+
+
+	while (1)
+	{
+		compe.dibujarTodo();
+		compe.moverTodo();
+		_sleep(100);
+
+		if (_kbhit())
+		{
+			tecla = _getch();
+			if (tecla == 32)
+			{
+				compe.OtraVez();
+			}
+
+			if (tecla == 27)
+			{
+			   Console::Clear();
+			   break;
+			}
+		}
+	}
+
+	compe.MostrarRanking();
+	
+	_getch();
+	return 0;
+}

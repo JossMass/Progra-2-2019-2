@@ -1,0 +1,14 @@
+private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
+		Graphics^ g = this->CreateGraphics();
+		BufferedGraphicsContext^espacio = BufferedGraphicsManager::Current;
+		BufferedGraphics^ buffer = espacio->Allocate(g, this->ClientRectangle);
+
+		objC->Dibujarcolor(buffer->Graphics);
+		objC->Movercolor(this->Width, objR->getY(), objR->getX(), objR->getMaxX());
+    
+		objR->dibujar_barra(buffer->Graphics);		
+		buffer->Render(g);
+		delete g;
+		delete espacio;
+
+	}

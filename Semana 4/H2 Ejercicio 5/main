@@ -1,0 +1,29 @@
+#include <iostream>
+#include <conio.h>
+#include <string>
+#include <time.h>
+
+#include "CArregloMensajes.h"
+
+using namespace std;
+
+int main()
+{
+	srand(time(NULL));
+	CArregloMensajes *ObjArreglo = new CArregloMensajes(5);
+	ObjArreglo->AgregarDatos();
+	ObjArreglo->AgregarDatos();
+	ObjArreglo->AgregarDatos();
+	ObjArreglo->getArreglo();
+	cout << "Se inserto" << endl;
+	ObjArreglo->Insertar(2);
+	ObjArreglo->getArreglo();
+	//ObjArreglo->Eliminar(0);
+	//ObjArreglo->getArreglo();
+	//ObjArreglo->Modificar("Te tengo", 0);
+	//ObjArreglo->getArreglo();
+
+
+	_getch();
+	return 0;
+}

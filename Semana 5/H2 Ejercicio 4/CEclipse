@@ -1,0 +1,54 @@
+#pragma once
+
+#include <iostream>
+#include <string>
+
+#include "CFecha.h"
+#include "CHora.h"
+
+using namespace std;
+
+string Continentes[5] = { "America del Sur","Europa","Africa","America del Norte", "Asia" };
+string Tipos[2] = { "Lunar","Solar" };
+string Frases[2] = { "Si","No" };
+
+class CEclipse
+{
+private:
+	string Tipo;
+	CFecha Fecha;
+	CHora Hora;
+	string Sismo;
+	string Lluvias;
+	string Visibilidad;
+
+public:
+	CEclipse()
+	{
+		Tipo = Tipos[rand() % 2];
+		Fecha = CFecha();
+		Hora = CHora();
+		Sismo = Frases[rand() % 2];
+		Lluvias = Frases[rand() % 2];
+		Visibilidad = Continentes[rand() % 5];
+	}
+
+	~CEclipse(){}
+
+	void setTipo(string v) { Tipo = v; }
+	string getTipo() { return Tipo; }
+
+	string getVisibilidad() { return Visibilidad; }
+	string getSismo() { return Sismo; }
+	CHora getHora() { return Hora; }
+
+	void MostrarInfo()
+	{
+		cout << "Tipo: " << Tipo << endl;
+		cout << "Fecha: " << Fecha.getFechaCompleta() << endl;
+		cout << "Hora: " << Hora.getHoraCompleta() << endl;
+		cout << "Sismo: " << Sismo << endl;
+		cout << "LLuvias: " << Lluvias << endl;
+		cout << "Visibilidad: " << Visibilidad << endl << endl;
+	}
+};

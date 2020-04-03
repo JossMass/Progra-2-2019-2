@@ -1,0 +1,30 @@
+#pragma once
+
+#include <iostream>
+#include <conio.h>
+#include <string>
+
+#include "CEstudiante.h"
+
+using namespace std;
+
+class Universitario : public Estudiante
+{
+private: 
+	string universidad;
+	string carrera;
+
+public:
+	Universitario(string nombre, int edad, int celular, int cod, int promedio, string universidad, string carrera) : Estudiante(nombre, edad, celular, cod, promedio)
+	{
+		this->universidad = universidad;
+		this->carrera = carrera;
+	}
+
+	void MostrarDatosUniversitario()
+	{
+		MostrarDatosEstudiante();
+		cout << "Universidad: " << universidad << endl;
+		cout << "Carrera: " << carrera << endl;
+	}
+};

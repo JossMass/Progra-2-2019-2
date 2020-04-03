@@ -1,0 +1,98 @@
+#pragma once
+#include <iostream>
+#include <conio.h>
+
+#include "CMensaje.h"
+
+using namespace std;
+
+class CArregloMensajes
+{
+private:
+	int N;
+	int index;
+	CMensaje **Arreglo;
+
+public:
+	CArregloMensajes(int _N)
+	{
+		index = -1;
+		N = _N;
+		Arreglo = new CMensaje*[N];
+	}
+
+	~CArregloMensajes(){}
+
+	void AgregarDatos()
+	{
+		CMensaje *a = new CMensaje();
+
+		if (index + 1 < N)
+		{
+			index++;
+			Arreglo[index] = a;
+		}
+	}
+
+	void Insertar(int posicion)
+	{
+		CMensaje *a = new CMensaje();
+
+		if (index + 1 < N)
+		{
+			for (int i = 0; i <= index; i++)
+			{
+				if (i == posicion)
+				{
+					for (int j = posicion; j <= index; j++)
+					{
+						Arreglo[j + 1] = Arreglo[j];
+					}
+				
+					Arreglo[posicion] = a;
+				}
+			}
+
+			index++;
+		}
+		
+
+		
+	}
+
+	void Modificar(string _Mensaje, int posicion)
+	{
+		for (int i = 0; i <= index; i++)
+		{
+			if (i == posicion)
+			{
+				Arreglo[i]->setMensaje(_Mensaje);
+			}
+		}
+	}
+
+	void Eliminar(int posicion)
+	{
+		for (int i = 0; i <= index - 1; i++)
+		{
+			if (i == posicion)
+			{
+				for (int j = posicion; j <= index; j++)
+				{
+					Arreglo[j] = Arreglo[j + 1];
+				}
+			}
+		}
+
+		index--;
+	}
+
+	void getArreglo()
+	{
+		for (int i = 0; i <= index; i++)
+		{
+			Arreglo[i]->getInformacion();
+			cout << endl;
+		}
+	}
+};

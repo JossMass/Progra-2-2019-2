@@ -1,0 +1,67 @@
+#pragma once
+#include <iostream>
+#include <string>
+#include <vector>
+
+#include "PlanVacac.h"
+
+using namespace std;
+
+class CArrPlanVacac
+{
+private:
+	vector<CPlanVacac*> arreglo;
+
+public:
+	CArrPlanVacac(){}
+	~CArrPlanVacac() {}
+
+	void Agregar()
+	{
+		CPlanVacac *aux = new CPlanVacac();
+		arreglo.push_back(aux);
+	}
+
+	void Eliminar()
+	{
+		arreglo.pop_back();
+	}
+
+	void ListarPorFecha(int banio, int aanio)
+	{
+		for (int i = 0; i < arreglo.size(); i++)
+		{
+			if (arreglo[i]->getAnio() > banio && arreglo[i]->getAnio() < aanio)
+			{
+				arreglo[i]->getInfoPlanVacac();
+			}
+		}
+	}
+
+	void ListarPlanVacacMismoHotel(string nombre)
+	{
+		for (int i = 0; i < arreglo.size(); i++)
+		{
+			if (arreglo[i]->getNombre() == nombre)
+			{
+				arreglo[i]->getInfoPlanVacac();
+			}
+		}
+	}
+
+	void ListarBoletosPlanVacac()
+	{
+		for (int i = 0; i < arreglo.size(); i++)
+		{
+			arreglo[i]->getInfoBoleto();
+		}
+	}
+
+	void ListarTodo()
+	{
+		for (int i = 0; i < arreglo.size(); i++)
+		{
+			arreglo[i]->getInfoPlanVacac();
+		}
+	}
+};

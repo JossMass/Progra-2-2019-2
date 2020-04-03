@@ -1,0 +1,22 @@
+//Clases en C++
+
+#include <iostream>
+#include <conio.h>
+#include <string>
+
+#include "CUniversitario.h"
+
+using namespace std;
+using namespace System;
+
+
+int main()
+{
+
+	Universitario objUniver = Universitario("Juan", 20, 964782654, 201720523, 17, "UPC", "Sistemas");
+
+	objUniver.MostrarDatosUniversitario();
+
+	_getch();
+	return 0;
+}

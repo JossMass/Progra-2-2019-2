@@ -1,0 +1,43 @@
+#pragma once
+#include <iostream>
+#include <string>
+#include <vector>
+#include <conio.h>
+
+#include "Avion.h"
+#include "Lan.h"
+
+using namespace std;
+
+class CTour
+{
+private:
+	vector<CAvion*> aviones;
+public:
+	CTour() 
+	{
+		int y = 5;
+		aviones.push_back(new CLan(10, y, rand() % 3 + 1));
+		aviones.push_back(new CLan(30, y, rand() % 3 + 1));
+	}
+	~CTour(){}
+
+	void ComenzarTour()
+	{
+		string texto = "Presiones la barra para que comienze el tour";
+		cout << texto;
+		char tecla = _getch();
+		
+		if (tecla == 32)
+		{
+			while (1)
+			{
+				for (int i = 0; i < aviones.size(); i++)
+				{
+					aviones.at(i)->avanzar();
+				}
+			}
+			
+		}
+	}
+};

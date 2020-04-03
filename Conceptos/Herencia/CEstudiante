@@ -1,0 +1,27 @@
+#pragma once
+
+#include <iostream>
+#include <conio.h>
+#include <string>
+
+#include "CPersona.h"
+
+class Estudiante : public Persona
+{
+protected:
+	int codEstudiante;
+	int promedio;
+public:
+	Estudiante(string nombre, int edad, int celular, int codEstudiante, int promedio) : Persona(nombre, edad, celular)
+	{
+		this->codEstudiante = codEstudiante;
+		this->promedio = promedio;
+	}
+
+	void MostrarDatosEstudiante()
+	{
+		MostrarDatosPersona();
+		cout << "CodigoEstudiante: " << codEstudiante << endl;
+		cout << "Promedio: " << promedio << endl;
+	}
+};

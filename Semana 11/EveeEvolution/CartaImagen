@@ -1,0 +1,45 @@
+#pragma once
+#include <iostream>
+
+using namespace System::Drawing;
+
+int num[2] = { 10,-10 };
+
+class CCartaImagen
+{
+protected:
+	int x, y;
+	int dx, dy;
+	int alto;
+	int ancho;
+	bool visible;
+
+public:
+	CCartaImagen()
+	{
+		x = 50 + rand() % 600;
+		y = 50 + rand() % 200;
+		dx = num[rand() % 2];
+		dy = num[rand() % 2];
+		visible = true;
+	}
+
+	CCartaImagen(int x, int y)
+	{
+		this->x = x;
+		this->y = y;
+		dx = num[rand() % 2];
+		dy = num[rand() % 2];
+		visible = true;
+	}
+
+	~CCartaImagen(){}
+
+	virtual void mover(int maxAncho, int maxAlto) = 0;
+	virtual void dibujar(Graphics ^g, Bitmap ^bmp) = 0;
+
+	int getX() { return x; }
+	int getY() { return y; }
+	bool getVisible() { return visible; }
+	void setVisible(bool v) { visible = v; }
+};

@@ -1,0 +1,57 @@
+#pragma once
+#include <iostream>
+
+using namespace std;
+using namespace System;
+
+class CVehiculo
+{
+protected:
+	int x;
+	int y;
+	int modelo;
+	int puesto;
+	bool llego;
+	int victorias;
+	int ancho;
+public:
+	CVehiculo(int x, int y)
+	{
+		ancho = 0;
+		victorias = 0;
+		puesto = 0;
+		llego = false;
+		this->x = x;
+		this->y = y;
+		modelo = rand() % 2;
+	}
+
+	~CVehiculo(){}
+
+	void AumentoVictoria()
+	{
+		victorias++;
+	}
+
+	//Accesores
+	int getX() { return x; }
+	int getY() { return y; }
+	int getPuesto() { return puesto; }
+	bool getLlego() { return llego; }
+	int getVictorias() { return victorias; }
+
+	void setX(int v) { x = v; }
+	void setY(int v) { y = v; }
+	void setPuesto(int v) { puesto = v; }
+	void setLlego(bool v) { llego = v; }
+	void setVictorias(int v) { victorias = v; }
+
+
+	virtual void dibujar() = 0;
+
+	void mover()
+	{
+		if (x + ancho <= 70) x += rand() % 3 + 1;
+		else llego = true;
+	}
+};

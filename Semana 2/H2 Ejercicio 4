@@ -1,0 +1,113 @@
+#include <iostream>
+#include <conio.h>
+
+using namespace std;
+using namespace System;
+
+struct Dato
+{
+	int indice;
+	int numero;
+};
+
+void GenerarArreglo(Dato *arreglo, int n)
+{
+	Random r;
+	for (int i = 0; i < n; i++)
+	{
+		arreglo[i].indice = i;
+		arreglo[i].numero = r.Next(1, 51);
+	}
+}
+
+void ImprimirArreglo(Dato *arreglo, int n)
+{
+	cout << "Indice\t" << "Dato\t" << endl;
+	for (int i = 0; i < n; i++)
+	{
+		cout << arreglo[i].indice << "\t" << arreglo[i].numero << "\t" << endl;
+	}
+}
+
+void EliminarMultTres(Dato *arreglo, int &n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		if (arreglo[i].numero % 3 == 0)
+		{
+			for (int j = arreglo[i].indice; j < n-1; j++)
+			{
+				arreglo[j] = arreglo[j+1];
+			}
+			n--;
+		}
+	}
+}
+
+void Ordenar(Dato *arreglo, int n)
+{
+	Dato aux;
+	for (int i = 0; i < n - 1; i++)
+	{
+		for (int j = 0; j < n - i - 1; j++)
+		{
+			if (arreglo[j].numero < arreglo[j + 1].numero)
+			{
+				aux = arreglo[j];
+				arreglo[j] = arreglo[j + 1];
+				arreglo[j + 1] = aux;
+			}
+		}
+	}
+}
+
+void InsertarNumero(Dato *arreglo, int &n, int num)
+{
+	int aux;
+	for (int i = 0; i < n - 1; i++)
+	{
+		if (arreglo[i].numero == num) aux = i - 1;
+		if ((arreglo[i - 1].numero>num && arreglo[i + 1].numero<num)) aux = i;
+		if (num > arreglo[0].numero)aux = 0;
+		if (num < arreglo[n-2].numero) aux = n;
+	}
+
+	n++;
+	for (int j = n - 1; j >= aux; j--)
+	{
+		arreglo[j + 1].numero = arreglo[j].numero;
+	}
+	arreglo[aux].numero = num;
+	arreglo[aux].indice = n;
+}
+
+int main()
+{
+	int n, num;
+	n = 10;
+	/*do
+	{
+		cout << "Ingrese el valor de N: "; cin >> n;
+	} while (n > 50 || n < 40);*/
+	
+	Dato *arreglo = new Dato[n];
+	
+
+	GenerarArreglo(arreglo, n);
+	ImprimirArreglo(arreglo, n);
+	EliminarMultTres(arreglo, n);
+	cout << endl << endl;
+	ImprimirArreglo(arreglo, n);
+	Ordenar(arreglo, n);
+	cout << endl << endl;
+	ImprimirArreglo(arreglo, n);
+	cout << endl << endl;
+	cout << "Ingrese un numero: "; cin >> num;
+	InsertarNumero(arreglo, n, num);
+	cout << endl;
+	ImprimirArreglo(arreglo, n);
+
+
+	_getch();
+	return 0;
+}

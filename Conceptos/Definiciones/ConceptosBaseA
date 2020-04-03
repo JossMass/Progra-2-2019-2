@@ -1,0 +1,50 @@
+//Clases en C++
+
+#include <iostream>
+#include <conio.h>
+#include <string>
+
+using namespace std;
+using namespace System;
+
+class Persona
+{
+private: 
+	int edad;
+	string nombre;
+
+public:
+	Persona(int, string);
+	~Persona();
+	void leer();
+	void correr();
+};
+
+Persona::Persona(int _edad, string _nombre)
+{
+	this->edad = _edad;
+	this->nombre = _nombre;
+}
+
+Persona::~Persona(){}
+
+void Persona::leer()
+{
+	cout << "Soy " << nombre << "tengo " << edad << " anios y estoy leyendo un libro" << endl;
+}
+
+void Persona::correr()
+{
+	cout << "Soy " << nombre << "tengo " << edad << " anios y estoy corriendo un maraton" << endl;
+}
+
+int main()
+{
+	Persona objPersona(18, "Lucia");
+
+	objPersona.correr();
+	objPersona.leer();
+
+	_getch();
+	return 0;
+}

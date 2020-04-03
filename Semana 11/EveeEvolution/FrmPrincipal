@@ -1,0 +1,151 @@
+#pragma once
+#include "CartaImagen.h"
+#include "Eevee.h"
+#include "ArrImagenes.h"
+#include <ctime>
+namespace EveeEvolution {
+
+	using namespace System;
+	using namespace System::ComponentModel;
+	using namespace System::Collections;
+	using namespace System::Windows::Forms;
+	using namespace System::Data;
+	using namespace System::Drawing;
+
+	/// <summary>
+	/// Resumen de FrmPrincipal
+	/// </summary>
+	public ref class FrmPrincipal : public System::Windows::Forms::Form
+	{
+	public:
+		FrmPrincipal(void)
+		{
+			InitializeComponent();
+			srand(time(NULL));
+			arreglo = new CArrImagenes();
+		
+			bmpAgua = gcnew Bitmap("PiedraAgua.png");
+			bmpFuego = gcnew Bitmap("PiedraFuego.png");
+			bmpElectrica = gcnew Bitmap("PiedraElectrica.png");
+
+			bmpFlareon = gcnew Bitmap("Flareon.png");
+			bmpVaporeon = gcnew Bitmap("Vaporeon.png");
+			bmpJolteon = gcnew Bitmap("Jolteon.png");
+
+			bmpEevee = gcnew Bitmap("Eevee.png");
+
+		}
+	private:
+		CArrImagenes *arreglo;
+		Bitmap ^bmpAgua;
+		Bitmap ^bmpFuego;
+		Bitmap ^bmpElectrica;
+
+		Bitmap ^bmpJolteon;
+		Bitmap ^bmpVaporeon;
+		Bitmap ^bmpFlareon;
+		Bitmap ^bmpEevee;
+
+
+	protected:
+		/// <summary>
+		/// Limpiar los recursos que se estén usando.
+		/// </summary>
+		~FrmPrincipal()
+		{
+			if (components)
+			{
+				delete components;
+			}
+		}
+	private: System::Windows::Forms::Panel^  pnlLienzo;
+	private: System::Windows::Forms::Timer^  timer1;
+	private: System::ComponentModel::IContainer^  components;
+	protected:
+
+	private:
+		/// <summary>
+		/// Variable del diseñador necesaria.
+		/// </summary>
+
+
+#pragma region Windows Form Designer generated code
+		/// <summary>
+		/// Método necesario para admitir el Diseñador. No se puede modificar
+		/// el contenido de este método con el editor de código.
+		/// </summary>
+		void InitializeComponent(void)
+		{
+			this->components = (gcnew System::ComponentModel::Container());
+			this->pnlLienzo = (gcnew System::Windows::Forms::Panel());
+			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
+			this->SuspendLayout();
+			// 
+			// pnlLienzo
+			// 
+			this->pnlLienzo->Location = System::Drawing::Point(0, 0);
+			this->pnlLienzo->Name = L"pnlLienzo";
+			this->pnlLienzo->Size = System::Drawing::Size(809, 348);
+			this->pnlLienzo->TabIndex = 0;
+			// 
+			// timer1
+			// 
+			this->timer1->Tick += gcnew System::EventHandler(this, &FrmPrincipal::timer1_Tick);
+			// 
+			// FrmPrincipal
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(808, 348);
+			this->Controls->Add(this->pnlLienzo);
+			this->Name = L"FrmPrincipal";
+			this->Text = L"FrmPrincipal";
+			this->Load += gcnew System::EventHandler(this, &FrmPrincipal::FrmPrincipal_Load);
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &FrmPrincipal::FrmPrincipal_KeyDown);
+			this->ResumeLayout(false);
+
+		}
+#pragma endregion
+	private: System::Void FrmPrincipal_Load(System::Object^  sender, System::EventArgs^  e) {
+		timer1->Enabled = true;
+	}
+	private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
+		Graphics ^g;
+		g = pnlLienzo->CreateGraphics();
+		BufferedGraphicsContext^espacio = BufferedGraphicsManager::Current;
+		BufferedGraphics^ buffer = espacio->Allocate(g, pnlLienzo->ClientRectangle);
+
+		buffer->Graphics->Clear(Color::White);
+		/*g->Clear(Color::White);*/
+		arreglo->Colision();
+		arreglo->moverTodo(pnlLienzo->Width, pnlLienzo->Height);
+		/*arreglo->dibujarTodo(g,bmpEevee,bmpFlareon,bmpVaporeon,
+			bmpJolteon,bmpFuego,bmpElectrica,bmpAgua);*/
+		arreglo->dibujarTodo(buffer->Graphics,bmpEevee,bmpFlareon,bmpVaporeon,
+			bmpJolteon,bmpFuego,bmpElectrica,bmpAgua);
+
+		buffer->Render(g);
+
+		delete g;
+		delete espacio;
+	}
+	private: System::Void FrmPrincipal_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e) {
+
+		switch (e->KeyCode)
+		{
+		case Keys::N:
+			arreglo->AgregarEevee();
+			break;
+		case Keys::F:
+			arreglo->AgregarPiedraFuego();
+			break;
+		case Keys::E:
+			arreglo->AgregarPiedraElectrica();
+			break;
+		case Keys::A:
+			arreglo->AgregarPiedraAgua();
+			break;
+		}
+	}
+	};
+}

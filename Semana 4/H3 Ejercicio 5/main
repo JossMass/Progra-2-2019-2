@@ -1,0 +1,22 @@
+#include <iostream>
+#include <conio.h>
+#include <string>
+#include <time.h>
+
+#include "CCompetencia.h"
+
+using namespace std;
+
+int main()
+{
+	
+	srand(time(NULL));
+	CCompetencia *compe = new CCompetencia();
+
+	compe->GenerarCarros();
+	compe->Pista();
+	compe->Carrera();
+
+	_getch();
+	return 0;
+}

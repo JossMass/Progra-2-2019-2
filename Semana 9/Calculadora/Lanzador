@@ -1,0 +1,14 @@
+#include "FrmPrincipal.h" //Formulario principal
+
+using namespace Calculadora; //Nombre del Proyecto
+
+int main()
+{
+	FrmPrincipal ^ frm = gcnew FrmPrincipal(); //CreacionObjeto
+	Application::Run(frm);//CorrerFormulario
+	return 0;
+}
+
+/*Proyecto->Properties
+Vinculador->Sistema->Subsistema->Windows
+Vinculador->Avanzadas->PuntoEntrada->main*/

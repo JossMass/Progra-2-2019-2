@@ -1,0 +1,49 @@
+#pragma once
+#include <iostream>
+#include <string>
+
+#include "CFecha.h"
+
+using namespace std;
+
+string Frases[5] = { "Ayudame!","Tenemos a su hij@", "Queremos dinero","Ganaremos","Auxilio" };
+string Origenes[3] = { "Zona Urbana","Zona Rural", "Zona Innaccesible" };
+string Riesgos[3] = { "Bajo","Medio", "Alto" };
+
+
+class CMensaje
+{
+private:
+	string Mensaje;
+	CFecha Fecha;
+	int Hora;
+	string Origen;
+	string Riesgo;
+  
+public:
+	CMensaje()
+	{
+		Mensaje = Frases[rand() % 5];
+		Hora = rand() % 2400;
+		Origen = Origenes[rand() % 3];
+		Riesgo = Riesgos[rand() % 3];
+	}
+
+	~CMensaje(){}
+
+	void setMensaje(string v) { Mensaje = v; }
+	void setFecha(CFecha v) { Fecha = v; }
+	void setHora(int v) { Hora = v; }
+	void setOrigen(string v) { Origen = v; }
+	void setRiesgo(string v) { Riesgo = v; }
+	
+	void getInformacion()
+	{
+		cout << "Mensaje: " << Mensaje << endl;
+		cout << "Fecha: " << Fecha.getFecha() << endl;
+		cout << "Hora: " << Hora << endl;
+		cout << "Origen: " << Origen << endl;
+		cout << "Riesgo: " << Riesgo << endl;
+	}
+
+};

@@ -1,0 +1,30 @@
+#pragma once
+using namespace System::Drawing;
+
+class CElipse
+{
+private:
+	int radio;
+	int x;
+	int y;
+
+public:
+	CElipse(int radio, int x, int y)
+	{
+		this->radio = radio;
+		this->x = x;
+		this->y = y;
+	}
+
+	~CElipse(){}
+
+	double getArea()
+	{
+		return 3.14*radio*radio;
+	}
+
+	void dibujar(Graphics ^g, Brush ^pincel)
+	{
+		g->FillEllipse(pincel, x, y, radio, radio);
+	}
+};

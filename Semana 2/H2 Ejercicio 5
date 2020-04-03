@@ -1,0 +1,118 @@
+#include <iostream>
+#include <conio.h>
+
+using namespace std;
+using namespace System;
+
+struct Dato
+{
+	int indice;
+	int numero;
+};
+
+void GenerarArreglo(Dato *arreglo, int n)
+{
+	Random r;
+	for (int i = 0; i < n; i++)
+	{
+		arreglo[i].indice = i;
+		arreglo[i].numero = r.Next(1, 51);
+	}
+}
+
+void ImprimirArreglo(Dato *arreglo, int n)
+{
+	cout << "Indice\t" << "Dato\t" << endl;
+	for (int i = 0; i < n; i++)
+	{
+		cout << arreglo[i].indice << "\t" << arreglo[i].numero << "\t" << endl;
+	}
+}
+
+
+void Ordenar(Dato *arreglo, int n)
+{
+	int aux;
+	for (int i = 0; i < n - 1; i++)
+	{
+		for (int j = 0; j < n - i - 1; j++)
+		{
+			if (arreglo[j].numero > arreglo[j + 1].numero)
+			{
+				aux = arreglo[j].numero;
+				arreglo[j].numero = arreglo[j + 1].numero;
+				arreglo[j + 1].numero = aux;
+			}
+		}
+	}
+}
+
+
+bool Existe(Dato *arreglo, int n, int num)
+{
+	for (int i = 0; i < n; i++)
+	{
+		if (arreglo[i].numero == num)return true;
+	}
+	return false;
+}
+
+void Insertar(Dato *arreglo, int n, int num, int &cont)
+{
+	for (int i = n - 1; i >= cont; i--)
+	{
+		arreglo[i + 1] = arreglo[i];
+	}
+	arreglo[cont].numero = num;
+	arreglo[cont].indice = cont;
+	cont++;
+	
+}
+
+void ModificarArreglo(Dato *arreglo, int &n, int R, int cont)
+{
+	Dato *aux = new Dato[150];
+
+	for (int i = 0; i < n; i++)
+	{
+		if (Existe(aux, 150, arreglo[i].numero) == false)
+		{
+			for (int j = 0; j < R; j++)
+			{
+				Insertar(aux, 150, arreglo[i].numero, cont);
+			}
+		}
+	}
+	ImprimirArreglo(aux, cont);
+}
+
+int main()
+{
+	int n, R;
+	n = 10;
+	R = 3;
+	int cont = 0;
+
+	/*do
+	{
+		cout << "Ingrese el valor de N: "; cin >> n;
+	} while (n > 30 || n < 10);*/
+	/*do
+	{
+	cout << "Ingrese el valor de R: "; cin >> n;
+	} while (n > 5 || n < 2);*/
+
+	Dato *arreglo = new Dato[n];
+	
+	GenerarArreglo(arreglo, n);
+	ImprimirArreglo(arreglo, n);
+	Ordenar(arreglo, n);
+	cout << endl << endl;
+	ImprimirArreglo(arreglo, n);
+	cout << endl << endl;
+	ModificarArreglo(arreglo, n, R, cont);
+
+
+	_getch();
+	return 0;
+}

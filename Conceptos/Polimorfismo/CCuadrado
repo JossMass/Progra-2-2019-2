@@ -1,0 +1,30 @@
+#pragma once
+
+#include <iostream>
+#include <conio.h>
+#include <string>
+
+using namespace std;
+
+class Cuadrado : public Figura
+{
+private:
+	int lado;
+
+public:
+	Cuadrado(int lado) : Figura()
+	{
+		this->lado = lado;
+	}
+	~Cuadrado(){}
+	
+	void Area()
+	{
+		cout << "El area es: " << lado * lado << endl;
+	}
+
+	void Perimetro()
+	{
+		cout << "El permitro es: " << 4 * lado << endl;
+	}
+};

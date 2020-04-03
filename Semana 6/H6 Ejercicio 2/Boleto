@@ -1,0 +1,38 @@
+#pragma once
+#include <iostream>
+#include <string>
+
+#include "Fecha.h"
+
+using namespace std;
+
+class CBoleto
+{
+protected:
+	long codigo;
+	double precio;
+	CFecha fecha;
+
+public:
+	CBoleto()
+	{
+		codigo = rand() % 9543142;
+		precio = rand() % 1000;
+	}
+
+	~CBoleto(){}
+
+	int getDia() { return fecha.getDia(); }
+	int getMes() { return fecha.getMes(); }
+	int getAnio() { return fecha.getAnio(); }
+
+	void getInfoBoleto()
+	{
+		cout << "Boleto" << endl;
+		cout << "Codigo: " << codigo << endl;
+		cout << "Precio: " << precio << endl;
+		cout << "Fecha: " << fecha.getFechaCompleta() << endl;
+	}
+
+
+};

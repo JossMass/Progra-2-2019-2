@@ -1,0 +1,39 @@
+#pragma once
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+string Continentes[5] = { "America del Sur","Europa","Africa","America del Norte", "Asia" };
+string Estilos[4] = { "Vintage","Barroco","Moderno","Simple" };
+string Nombres[3] = { "Marriot","Wisen","Clausem" };
+
+class CHotel
+{
+protected:
+	string nombre;
+	string ubicacion;
+	string estilo;
+
+public:
+	CHotel()
+	{
+		ubicacion = Continentes[rand() % 5];
+		estilo = Estilos[rand() % 4];
+		nombre = Nombres[rand() % 3];
+	}
+
+	~CHotel(){}
+
+	string getUbicacion() { return ubicacion; }
+	string getEstilo() { return estilo; }
+	string getNombre() { return nombre; }
+
+	void getInfoHotel()
+	{
+		cout << "Hotel" << endl;
+		cout << "Nombre: " << nombre << endl;
+		cout << "Ubicacion: " << ubicacion << endl;
+		cout << "Estilo: " << estilo << endl << endl;
+	}
+};

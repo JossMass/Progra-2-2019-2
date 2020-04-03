@@ -1,0 +1,37 @@
+#pragma once
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class CHora
+{
+private:
+	int h, m, s;
+
+public:
+	CHora()
+	{
+		h = rand() % 24;
+		m = rand() % 61;
+		s = rand() % 61;
+	}
+
+	~CHora() {}
+
+	int getHora() { return h; }
+	int getMin() { return m; }
+	int getSeg() { return s; }
+
+	string getHoraCompleta()
+	{
+		string aux;
+		aux.append(to_string(h));
+		aux.append(":");
+		aux.append(to_string(m));
+		aux.append(":");
+		aux.append(to_string(s));
+
+		return aux;
+	}
+};

@@ -1,0 +1,36 @@
+//Clases en C++
+
+#include <iostream>
+#include <conio.h>
+#include <string>
+
+#include "CCuadrado.h"
+#include "CTriangulo.h"
+
+using namespace std;
+using namespace System;
+
+
+int main()
+{
+	Figura *vector[2];
+
+	vector[0] = new Triangulo(8, 5);
+	vector[1] = new Cuadrado(4);
+
+	cout << "Triangulo" << endl;
+	vector[0]->Area();
+	vector[0]->Perimetro();
+	
+	cout << endl;
+
+	cout << "Cuadrado " << endl;
+	vector[1]->Area();
+	vector[1]->Perimetro();
+
+
+
+
+	_getch();
+	return 0;
+}
